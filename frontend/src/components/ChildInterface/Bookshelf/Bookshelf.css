@@ -1,0 +1,10 @@
+.bookshelf {
+    background-image: url('bookshelf.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px; 
+  }

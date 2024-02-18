@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Book from './Book'; 
 import './Bookshelf.css'; 
 
 const Bookshelf = () => {
   const [recipes, setRecipes] = useState([]); // Initialize recipes state
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Function to fetch recipes
@@ -46,6 +48,7 @@ const Bookshelf = () => {
       }
       const recipeDetails = await response.json();
       setSelectedRecipe(recipeDetails);
+      navigate(`/recipe/${recipeId}`)
     } catch (error) {
       console.error("Failed to fetch recipe details:", error);
     }

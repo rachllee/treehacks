@@ -8,7 +8,7 @@ from email_validator import validate_email, EmailNotValidError
 from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
 
-import openai
+##import openai
 import os
 import re
 import json 
@@ -25,7 +25,11 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
 
+
 login_manager = LoginManager()
+
+from models import *
+
 login_manager.init_app(app)
 
 from models import *

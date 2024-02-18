@@ -31,6 +31,7 @@ login_manager.init_app(app)
 @cross_origin()
 def register():
     data = request.get_json()
+    print('Received data:', data)
     parent_name = data.get('name')
     email = data.get('email')
     password = data.get('password')
@@ -41,18 +42,23 @@ def register():
         return jsonify({"Error": "Invalid email"}), 400
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
     try:
+        print('in try loop')
         new_parent = Parent(name=parent_name, email=email, password=hashed_password)
         db.session.add(new_parent)
 
         # assuming child_data is entered as a list of dictionaries
         child_data = data.get('children')
+        print('before for loop')
         for child in child_data:
+            print('child:', child)
             name = child.get('name')
             age = child.get('age')
             new_child = Child(name=name, age=age)
             db.session.add(new_child)
 
+        print('before commit')
         db.session.commit()
+        print('after commit')
         return jsonify({"message": "User registered!"})
     except Exception as e:
         return jsonify({"Error": str(e)}), 500

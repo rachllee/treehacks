@@ -10,8 +10,9 @@ const Bookshelf = () => {
     // Function to fetch recipes
     const fetchRecipes = async () => {
       try {
-        const response = await fetch('http://localhost:5000/recipes', { // Your endpoint to fetch recipes
+        const response = await fetch('http://127.0.0.1:5000/recipes', {
           method: 'GET',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
             // Include other headers as needed, e.g., authorization
@@ -32,9 +33,9 @@ const Bookshelf = () => {
 
   const handleBookClick = async (recipeId) => {
     try {
-      const response = await fetch(`http://localhost:5000/recipe/${recipeId}`, {
+      const response = await fetch(`http://127.0.0.1:5000/recipe/${recipeId}`, {
         method: 'GET',
-        credentials: 'include', // Needed for cookies to be sent if you're using session-based authentication
+        credentials: 'include', 
         headers: {
           'Content-Type': 'application/json',
           // Add your auth headers here if needed, e.g., Authorization: 'Bearer <token>'

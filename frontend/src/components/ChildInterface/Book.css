@@ -1,0 +1,45 @@
+/* Book.css - Updated */
+.book {
+    width: 160px; /* Bigger book width */
+    height: 240px; /* Bigger book height */
+    perspective: 1000px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 40px; /* Increase spacing */
+    transition: transform 0.3s ease; /* Smooth transformation */
+  }
+  
+  .book:hover {
+    transform: scale(1.1); /* Slightly enlarge books on hover for effect */
+  }
+  
+  .book-spine {
+    position: absolute;
+    width: 25px; /* Thicker spine for cartoonish look */
+    height: 100%;
+    background-color: #ff5722; /* Brighter, fun color */
+    transform: rotateY(0deg) translateZ(-60px); /* Adjust for 3D effect */
+  }
+  
+  .book-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #f13f2c; /* Cheerful cover color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateY(-20deg); /* Less tilted for a clearer view */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    border: 5px solid #fff; /* Cartoonish border */
+    color: #fff; /* Text color */
+    font-family: 'Comic Sans MS', 'Arial', sans-serif; /* More playful font */
+    font-size: 1.5em; /* Larger text */
+  }
+  
+  .book-front span {
+    transform: rotateY(20deg); /* Counteract book-front rotation */
+    display: block;
+    text-align: center;
+  }
+  

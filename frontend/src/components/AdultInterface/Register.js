@@ -44,7 +44,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/register', parentInfo);
+      const response = await axios.post('http://127.0.0.1:5000/register', parentInfo);
       console.log(response.data);
       alert('Registration submitted successfully!');
       

@@ -5,14 +5,13 @@ from flask_login import *
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from email_validator import validate_email, EmailNotValidError
-from models import *
 from flask_cors import CORS, cross_origin
 
-import openai
+##import openai
 import os
 import re
 import json 
-import os.openai.api_key = os.getenv('OPENAI_API_KEY')
+## import os.openai.api_key = os.getenv('OPENAI_API_KEY')
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///recipes.db"
@@ -23,7 +22,11 @@ app.secret_key = 'secretkey'
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
 
+
 login_manager = LoginManager()
+
+from models import *
+
 login_manager.init_app(app)
 
 
@@ -57,7 +60,12 @@ def register():
             db.session.add(new_child)
 
         print('before commit')
-        db.session.commit()
+        try:
+            print('Database URL:', app.config["SQLALCHEMY_DATABASE_URI"])
+            db.session.commit()
+        except Exception as e:
+            print(f"commit failed with error:  {str(e)}")
+
         print('after commit')
         return jsonify({"message": "User registered!"})
     except Exception as e:

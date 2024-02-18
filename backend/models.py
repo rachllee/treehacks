@@ -1,6 +1,9 @@
 from app import db
 from flask_login import UserMixin
 from app import login_manager
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 child_recipe = db.Table('child_recipe',
     db.Column('child_id', db.Integer, db.ForeignKey('child.id'), primary_key=True),

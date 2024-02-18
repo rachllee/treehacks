@@ -4,7 +4,6 @@ import Register from './components/AdultInterface/Register';
 import ChildInterface from './components/ChildInterface/ChildInterface';
 import RecipeApp from './components/ChildInterface/RecipeApp';
 import Welcome from './components/ChildInterface/Welcome';
-import Signin from './components/AdultInterface/Signin';
 import Bookshelf from './components/ChildInterface/Bookshelf';
 import Home from './components/AdultInterface/Home'; 
 import Login from './components/AdultInterface/Login'; 

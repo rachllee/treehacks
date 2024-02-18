@@ -22,7 +22,6 @@ const AddRecipe = () => {
     e.preventDefault();
     
     try {
-        console.log("trying")
         const simplifyResponse = await axios.post('http://127.0.0.1:5000/simplify-recipe', { text: recipe.instructions });
         console.log('Recipe successfully simplified:');
         const simplifiedInstructions = simplifyResponse;
@@ -33,9 +32,8 @@ const AddRecipe = () => {
             simplified: simplifiedInstructions 
         };
 
-        const addRecipeResponse = await axios.post('/addrecipe', recipeWithSimplifiedInstructions);
+        const addRecipeResponse = await axios.post('http://127.0.0.1:5000/addrecipe', recipeWithSimplifiedInstructions);
         console.log('Recipe successfully added:', addRecipeResponse.data);
-        
         navigate('/dashboard');
     } catch (error) {
         console.error('There was an error processing the recipe:', error);

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import *
 from . import db, bcrypt, login_manager
-from .models import Parent, Child, Recipe
+from .models import Parent, Child, Recipe, Session
 from werkzeug.utils import secure_filename
 import os
 from flask_cors import CORS, cross_origin
@@ -9,6 +9,8 @@ import openai
 from flask_migrate import Migrate
 from email_validator import validate_email, EmailNotValidError
 import re
+import random
+from datetime import datetime, timedelta
 
 
 openai_api_key = os.getenv('OPENAI_API_KEY')
@@ -173,6 +175,7 @@ def get_recipe(recipe_id):
 @bp.route('/children', methods=['GET'])
 @login_required
 def list_children():
+    print('current user in session:', current_user)
     parent_id = current_user.id
     children = Child.query.filter_by(parent_id=parent_id).all()
     children_data = [{'id': child.id, 'name': child.name, 'age': child.age} for child in children]
@@ -181,7 +184,6 @@ def list_children():
 
 # update child
 @bp.route('/update_child/<child_id>', methods=['PUT'])
-@login_required
 def update_child(child_id):
     child = Child.query.filter_by(id=child_id).first()
     new_data = request.get_json()
@@ -290,6 +292,7 @@ def simplify_recipe():
         )
         arr = response.choices[0].message.content.split("\n")
         filtered_steps_array = [step for step in arr if step.strip()]
+        print(filtered_steps_array)
         return filtered_steps_array
 
     except Exception as e:
@@ -345,3 +348,28 @@ def transcribe_audio():
         if os.path.exists(file_path):
             os.remove(file_path)
 
+
+@bp.route('/start-session', methods=['POST'])
+def start_session():
+    session_code = ''.join(random.choices('0123456789', k=6))
+    new_session = Session(code=session_code)
+    db.session.add(new_session)
+    db.session.commit()
+    return jsonify({"code": session_code}), 200
+
+@bp.route('/join-session', methods=['POST'])
+def join_session():
+    data = request.get_json()
+    session_code = data.get("code")
+    session = Session.query.filter_by(code=session_code).first()
+    if session:
+        # Session exists, proceed with joining logic
+        # (e.g., adding child to session, if applicable)
+        # Remember to commit any changes to the database
+        # db.session.commit()
+        if datetime.utcnow() > session.expires_at:
+            return jsonify({"error": "Session has expired"}), 400
+        return jsonify({"message": "Successfully joined session", "code": session_code}), 200
+    else:
+        # Session does not exist, return an error message
+        return jsonify({"error": "Session code not found"}), 404

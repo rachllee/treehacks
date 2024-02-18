@@ -22,7 +22,7 @@ def create_app():
     CORS(app, supports_credentials=True)
 
     with app.app_context():
-        from .models import Parent, Child, Recipe 
+        from .models import Parent, Child, Recipe, Session
         from .routes import register_blueprints 
         register_blueprints(app) 
 

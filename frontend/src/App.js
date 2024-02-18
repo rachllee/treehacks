@@ -1,11 +1,11 @@
 import React from 'react';
-import AdultInterface from './components/AdultInterface/AdultInterface';
+import Register from './components/AdultInterface/Register';
 import ChildInterface from './components/ChildInterface/ChildInterface';
 
 const App = () => {
   return (
     <div>
-      <AdultInterface />
+      <Register />
       <ChildInterface />
     </div>
   );

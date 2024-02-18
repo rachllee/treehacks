@@ -1,5 +1,5 @@
-/* AdultInterface.css */
-.AdultInterface {
+
+.Register {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,11 +7,11 @@
     padding: 20px;
   }
   
-  .AdultInterface h1 {
+  .Register h1 {
     color: #333;
   }
   
-  .AdultInterface form {
+  .Register form {
     width: 100%;
     max-width: 500px;
     background: #f7f7f7;
@@ -20,15 +20,15 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .AdultInterface label {
+  .Register label {
     font-weight: bold;
     margin-top: 15px;
   }
   
-  .AdultInterface input[type="text"],
-  .AdultInterface input[type="number"],
-  .AdultInterface select,
-  .AdultInterface textarea {
+  .Register input[type="text"],
+  .Register input[type="number"],
+  .Register select,
+  .Register textarea {
     width: 100%;
     padding: 10px;
     margin: 5px 0 20px 0;
@@ -38,7 +38,7 @@
     box-sizing: border-box; /* Make sure padding doesn't affect the box size */
   }
   
-  .AdultInterface button {
+  .Register button {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -50,7 +50,7 @@
     font-size: 16px;
   }
   
-  .AdultInterface button:hover {
+  .Register button:hover {
     background-color: #45a049;
   }
   

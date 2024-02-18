@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './AdultInterface.css';
+import './Register.css';
 
-function AdultInterface() {
+function Register() {
   const [parentInfo, setParentInfo] = useState({
     title: '',
     ingredients: '',
@@ -40,7 +40,7 @@ function AdultInterface() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/register', parentInfo);
+      const response = await axios.post('http://localhost:5000/register', parentInfo);
       console.log(response.data);
       alert('Registration submitted successfully!');
       
@@ -59,7 +59,7 @@ function AdultInterface() {
   };
 
   return (
-    <div className="AdultInterface">
+    <div className="Register">
       <h1>Submit a Recipe</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -121,4 +121,4 @@ function AdultInterface() {
   );
 }
 
-export default AdultInterface;
+export default Register;

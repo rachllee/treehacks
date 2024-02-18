@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Register.css';
 
@@ -11,6 +12,8 @@ function Register() {
   });
 
   const [childrenCount, setChildrenCount] = useState(1);
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,6 +55,8 @@ function Register() {
 
       console.log(response.data);
       alert('Registration submitted successfully!');
+
+      navigate('/dashboard');
       
       // Reset form
       setParentInfo({

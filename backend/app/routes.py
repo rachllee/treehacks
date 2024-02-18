@@ -9,6 +9,7 @@ import openai
 from flask_migrate import Migrate
 from email_validator import validate_email, EmailNotValidError
 import re
+openai.api_key = "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"
 
 # Create a Blueprint
 bp = Blueprint('bp', __name__)
@@ -261,6 +262,7 @@ def simplify_recipe():
     text_to_prepend = data.get("text")
     
     try:
+        print("try loop")
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -279,8 +281,10 @@ def simplify_recipe():
             frequency_penalty=0,
             presence_penalty=0
         )
+        print("post response: ", response)
         arr = response.choices[0].message.content.split("\n")
         filtered_steps_array = [step for step in arr if step.strip()]
+        print(filtered_steps_array)
         return filtered_steps_array
 
     except Exception as e:

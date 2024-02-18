@@ -6,13 +6,22 @@ import RecipeApp from './components/ChildInterface/RecipeApp';
 import Welcome from './components/ChildInterface/Welcome';
 import Signin from './components/AdultInterface/Signin';
 import Bookshelf from './components/ChildInterface/Bookshelf';
+import Home from './components/AdultInterface/Home'; 
+import Login from './components/AdultInterface/Login'; 
+import Dashboard from './components/AdultInterface/Dashboard'; 
+import AddRecipe from './components/AdultInterface/AddRecipe'; 
 
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Welcome />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/cook" element={<Welcome/>} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/add-recipe" element={<AddRecipe />} />
         <Route path="/bookshelf" element={<Bookshelf />}/>
         <Route path="recipe/:id"  element={<RecipeApp />}/>
       </Routes>
@@ -20,16 +29,5 @@ const App = () => {
   )
 }
 
-
-
-
-
-// const App = () => {
-//   return (
-//     <div>
-//       <RecipeApp />
-//     </div>
-//   );
-// };
 
 export default App;

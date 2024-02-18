@@ -10,7 +10,7 @@ from flask_migrate import Migrate
 from email_validator import validate_email, EmailNotValidError
 import re
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 openai_api_key = os.getenv('OPENAI_API_KEY')
@@ -74,8 +74,8 @@ def login():
     user = Parent.query.filter_by(email=email).first()
 
     if user and bcrypt.check_password_hash(user.password, password):
-        login_user(user)
-        return jsonify({"message": "Logged in!"})
+        login_user(user, remember=True)
+        return jsonify({"message": "Logged in!", "id": user.email})
     return jsonify({"error": "Username or password invalid"})
 
 # logout
@@ -173,11 +173,12 @@ def get_recipe(recipe_id):
 
 # list children of parent
 @bp.route('/children', methods=['GET'])
-@login_required
 def list_children():
-    print('current user in session:', current_user)
-    parent_id = current_user.id
+    parent_id = request.args.get('parent_id')
+    if not parent_id:
+        return jsonify({'error': 'Missing parent_id'}), 400
     children = Child.query.filter_by(parent_id=parent_id).all()
+    print(children)
     children_data = [{'id': child.id, 'name': child.name, 'age': child.age} for child in children]
     return jsonify(children_data)
 

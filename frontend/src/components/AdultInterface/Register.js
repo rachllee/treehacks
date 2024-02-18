@@ -56,6 +56,8 @@ function Register() {
       console.log(response.data);
       alert('Registration submitted successfully!');
 
+      localStorage.setItem('parent_id', response.data.email);
+
       navigate('/dashboard');
       
       // Reset form

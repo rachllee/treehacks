@@ -26,6 +26,8 @@ const Login = () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/login', credentials);
       if (response.data.message === "Logged in!") {
+        console.log(response.data.id)
+        localStorage.setItem('parent_id', response.data.id);
         console.log('Login successful:', response.data);
         navigate('/dashboard'); 
       } else {

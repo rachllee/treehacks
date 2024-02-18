@@ -1,37 +1,36 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Screens.css';
+import axios from 'axios';
 
 const Welcome = () => {
   const [code, setCode] = useState('');
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    setCode(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
+  const handleJoinSession = async (e) => {
     e.preventDefault();
-    console.log(`Submitted code: ${code}`);
-    navigate('/bookshelf')
+    try {
+      // Replace '/join-session' with your actual endpoint
+      const response = await axios.post('/join-session', { code });
+      console.log('Session joined:', response.data);
+      navigate('/bookshelf', { state: { sessionCode: code } });
+    } catch (error) {
+      console.error('Error joining session:', error);
+      // Handle error (show error message)
+    }
   };
 
   return (
     <div className="container">
-      <h1 className = "title">Title or whatever</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="input-group">
-            <label className = "label">
-              Session Code:
-            </label>
-            <input
-              type="text"
-              value={code}
-              onChange={handleInputChange}
-              placeholder="Enter your session code here..."
-            />
-        </div>
-        <button type="submit">Submit</button>
+      <h1>Welcome to Title</h1>
+      <form onSubmit={handleJoinSession}>
+        <input
+          type="text"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          placeholder="Enter session code..."
+          required
+        />
+        <button type="submit">Join Session</button>
       </form>
     </div>
   );

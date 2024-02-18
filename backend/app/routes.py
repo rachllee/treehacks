@@ -162,7 +162,8 @@ def get_recipe(recipe_id):
         return jsonify({
             'id': recipe.id,
             'title': recipe.title,
-            'instructions': recipe.instructions
+            'instructions': recipe.instructions,
+            'simplified': recipe.simplified
         })
     else:
         return jsonify({'error': 'Recipe not found'}), 404

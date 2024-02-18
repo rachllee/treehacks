@@ -11,20 +11,26 @@ import Dashboard from './components/AdultInterface/Dashboard';
 import AddRecipe from './components/AdultInterface/AddRecipe'; 
 
 
+// const App = () => {
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/cook" element={<Welcome/>} />
+//         <Route path="/register" element={<Register />} />
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/dashboard" element={<Dashboard />} />
+//         <Route path="/add-recipe" element={<AddRecipe />} />
+//         <Route path="/bookshelf" element={<Bookshelf />}/>
+//         <Route path="recipe/:id"  element={<RecipeApp />}/>
+//       </Routes>
+//     </Router>
+//   )
+// }
+
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cook" element={<Welcome/>} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/add-recipe" element={<AddRecipe />} />
-        <Route path="/bookshelf" element={<Bookshelf />}/>
-        <Route path="recipe/:id"  element={<RecipeApp />}/>
-      </Routes>
-    </Router>
+    <RecipeApp />
   )
 }
 

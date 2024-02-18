@@ -1,0 +1,58 @@
+/* AdultInterface.css */
+.AdultInterface {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .AdultInterface h1 {
+    color: #333;
+  }
+  
+  .AdultInterface form {
+    width: 100%;
+    max-width: 500px;
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .AdultInterface label {
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+  .AdultInterface input[type="text"],
+  .AdultInterface input[type="number"],
+  .AdultInterface select,
+  .AdultInterface textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Make sure padding doesn't affect the box size */
+  }
+  
+  .AdultInterface button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .AdultInterface button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Add more styles as needed */
+  

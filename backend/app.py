@@ -6,9 +6,11 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from email_validator import validate_email, EmailNotValidError
 from models import *
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///recipes.db"
+CORS(app)
 
 db = SQLAlchemy(app)
 app.secret_key = 'secretkey'
@@ -20,9 +22,10 @@ login_manager.init_app(app)
 
 
 @app.route('/register', methods=['POST'])
+@cross_origin()
 def register():
     data = request.get_json()
-    parent_name = data.get('username')
+    parent_name = data.get('name')
     email = data.get('email')
     password = data.get('password')
     
@@ -209,7 +212,8 @@ def delete_recipe(recipe_id):
         return jsonify({"message": "Recipe removed successfully"})
     return jsonify({"Error": 'Unauthorized'}), 401
 
-
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
 

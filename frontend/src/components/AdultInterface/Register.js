@@ -4,12 +4,13 @@ import './Register.css';
 
 function Register() {
   const [parentInfo, setParentInfo] = useState({
-    title: '',
-    ingredients: '',
-    instructions: '',
-    childrenCount: 1,
+    name: '',
+    email: '',
+    password:'',
     children: []
   });
+
+  const [childrenCount, setChildrenCount] = useState(1);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,11 +22,14 @@ function Register() {
 
   const handleChildrenCountChange = (e) => {
     const count = parseInt(e.target.value, 10);
-    setParentInfo(prevState => ({
-      ...prevState,
-      childrenCount: count,
-      children: new Array(count).fill('').map((_, index) => prevState.children[index] || { name: '', age: '' })
-    }));
+    setChildrenCount(count);
+
+    if (count < parentInfo.children.length) {
+      setParentInfo(prevState => ({
+        ...prevState,
+        children: prevState.children.slice(0, count)
+      }));
+    }
   };
 
   const handleChildDetailChange = (index, field, value) => {
@@ -46,9 +50,9 @@ function Register() {
       
       // Reset form
       setParentInfo({
-        title: '',
-        ingredients: '',
-        instructions: '',
+        name: '',
+        email: '',
+        password: '',
         childrenCount: 1,
         children: []
       });
@@ -60,30 +64,32 @@ function Register() {
 
   return (
     <div className="Register">
-      <h1>Submit a Recipe</h1>
+      <h1>Register Account</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title:</label>
+          <label>Name</label>
           <input
             type="text"
-            name="title"
-            value={parentInfo.title}
+            name="name"
+            value={parentInfo.name}
             onChange={handleChange}
           />
         </div>
         <div>
-          <label>Ingredients (separated by commas):</label>
-          <textarea
-            name="ingredients"
-            value={parentInfo.ingredients}
+          <label>Email:</label>
+          <input
+            type="text"
+            name="email"
+            value={parentInfo.email}
             onChange={handleChange}
           />
         </div>
         <div>
-          <label>Instructions:</label>
-          <textarea
-            name="instructions"
-            value={parentInfo.instructions}
+          <label>Password</label>
+          <input
+            type="text"
+            name="password"
+            value={parentInfo.password}
             onChange={handleChange}
           />
         </div>
@@ -91,7 +97,7 @@ function Register() {
           <label>How many children do you have?</label>
           <select
             name="childrenCount"
-            value={parentInfo.childrenCount}
+            value= {childrenCount}
             onChange={handleChildrenCountChange}
           >
             {[1, 2, 3, 4, 5].map(count => (
@@ -99,7 +105,7 @@ function Register() {
             ))}
           </select>
         </div>
-        {Array.from({ length: parentInfo.childrenCount }, (_, index) => (
+        {Array.from({ length: childrenCount }, (_, index) => (
           <div key={index}>
             <label>Child {index + 1} Name:</label>
             <input
